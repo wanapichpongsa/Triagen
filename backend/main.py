@@ -16,6 +16,7 @@ BASE_URL = "https://api.ragie.ai"
 DOCUMENTS_ENDPOINT = f"{BASE_URL}/documents"
 RETRIEVALS_ENDPOINT = f"{BASE_URL}/retrievals"
 
+
 def ragie_get_datastructure() -> list[str]:
     # PROS: Returns in Markdown format
     # CONS: OCR is weaker than OpenAI
@@ -175,8 +176,39 @@ def log_instance_of_document(data_structure: dict) -> dict[str, any]:
     )
     print(response.choices[0].message.content)
 
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/process_document', methods=['POST'])
+def process_document():
+    try:
+        data = request.json
+        filename = data['filename']
+        content = data['content']
+        
+        # Decode base64 content
+        file_content = base64.b64decode(content)
+        
+        # Save temporarily or process directly
+        temp_path = f"temp_{filename}"
+        with open(temp_path, 'wb') as f:
+            f.write(file_content)
+            
+        # Process using your existing function
+        result = openai_get_datastructure(temp_path)
+        
+        # Clean up temp file if needed
+        os.remove(temp_path)
+        
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 def main():
     openai_get_datastructure("data/bloodtest-form.png")
     # log_instance_of_document(hardcoded_datastructure())
 if __name__ == "__main__":
-    main()
+    app.run(port=5000)

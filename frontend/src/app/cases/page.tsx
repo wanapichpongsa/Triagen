@@ -1,6 +1,7 @@
 "use client"
 
 import { UploadCloud } from 'lucide-react'
+import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,7 +11,42 @@ import { CasesTable } from "@/components/all-cases"
 import { Header } from "@/components/header"
 import { Sidebar } from "@/components/sidebar"
 
+import toast, { Toaster } from "react-hot-toast"
+
 export default function CasesPage() {
+  const [isUploading, setIsUploading] = useState(false)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    setSelectedFile(file || null)
+  }
+
+  const handleUploadClick = async () => {
+    if (!selectedFile) return
+
+    setIsUploading(true)
+    const formData = new FormData()
+    formData.append('file', selectedFile)
+
+    try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+      
+      if (!response.ok) throw new Error('Upload failed')
+      
+      const data = await response.json()
+      toast.success('Upload successful:', data)
+    } catch (error) {
+      console.error('Upload error:', error)
+      toast.error('Upload failed')
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
   return (
     <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
       <Sidebar />
@@ -26,11 +62,18 @@ export default function CasesPage() {
               <div className="flex items-center space-x-4">
                 <div className="grid w-full max-w-sm items-center gap-1.5">
                   <Label htmlFor="caseFile">Case File</Label>
-                  <Input id="caseFile" type="file" />
+                  <Input 
+                    id="caseFile" 
+                    type="file" 
+                    onChange={handleFileSelect}
+                    disabled={isUploading}
+                  />
                 </div>
-                <Button className="mt-6">
-                  <UploadCloud className="mr-2 h-4 w-4" /> Upload
+                <Button className="mt-6" onClick={handleUploadClick} disabled={isUploading}>
+                  <UploadCloud className="mr-2 h-4 w-4" />
+                  {isUploading ? 'Uploading...' : 'Upload'}
                 </Button>
+                <Toaster />
               </div>
             </div>
 
