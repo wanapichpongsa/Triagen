@@ -9,6 +9,8 @@ dependencies = [
     "openai>=1.63.0",
     "pandas>=2.2.3",
     "pdfplumber>=0.11.5",
+    "pillow>=11.1.0",
+    "pytesseract>=0.3.13",
     "python-dotenv>=1.0.1",
     "requests>=2.32.3",
 ]

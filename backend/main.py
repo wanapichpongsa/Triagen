@@ -5,6 +5,7 @@ from openai import OpenAI
 import pdfplumber
 import json
 import requests
+import base64
 
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
@@ -53,19 +54,25 @@ def ragie_get_datastructure() -> list[str]:
         print(f"Chunk {i} from document:", text, "\n\n\n\n\n")
     return ragie_response
 
-def openai_get_datastructure(file_path: str) -> dict[str, any]:
-    # This is basically what I want get_datastructure() to return:
-    system_prompt = "return a JSON object that represents the data structure of the document."
-    with open(file_path, "r") as file:
-        query = file.read()
+def openai_get_datastructure(image_path: str) -> dict[str, any]:
+    system_prompt = "You are a medical form parser. Extract the form structure and return it as a JSON object."
+    import pytesseract
+    from PIL import Image
 
+    # Read and encode image
+    image = Image.open(image_path)
+
+    # Use OCR to extract text from the image
+    extracted_text = pytesseract.image_to_string(image)
+    
     client = OpenAI(api_key=openai_api_key)
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4-1106-preview",
         messages=[
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": query}
-            ]
+            {"role": "user", "content": f"Extract the structure from this medical form: {extracted_text}"}
+        ],
+        max_tokens=1000
     )
     print(response.choices[0].message.content)
 
@@ -169,15 +176,7 @@ def log_instance_of_document(data_structure: dict) -> dict[str, any]:
     print(response.choices[0].message.content)
 
 def main():
-    # File paths
-    pdf_path = os.path.join(os.getcwd(), "backend", "data", "test.pdf")
-    try:
-        with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages:
-                print(page.extract_text())
-    except FileNotFoundError as e:
-        print(f"Error: Could not find PDF file - {e}")
-    # openai_get_datastructure("data/test.pdf")
+    openai_get_datastructure("data/bloodtest-form.png")
     # log_instance_of_document(hardcoded_datastructure())
 if __name__ == "__main__":
     main()
