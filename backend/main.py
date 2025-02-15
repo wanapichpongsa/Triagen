@@ -158,7 +158,7 @@ def hardcoded_datastructure() -> dict[str, any]:
         "Date/Time Received": None,
         "Additional Information": "For details on tests and sample tube requirements, refer to https://esneftpathology.nhs.uk or call 0300 303 5299."
     }
-    return form_data
+    return json.dumps(form_data, indent=4)
 
 def log_instance_of_document(data_structure: dict) -> dict[str, any]:
     """NOTE: I don't know what to do here yet."""
@@ -175,9 +175,16 @@ def log_instance_of_document(data_structure: dict) -> dict[str, any]:
             ]
     )
     print(response.choices[0].message.content)
+    with open ("format/format1.txt", "w") as f:
+        f.write(response.choices[0].message.content)
 
 def main():
-    openai_get_datastructure("data/bloodtest-form.png")
+    print(str(hardcoded_datastructure()))
+    with open ("format/format1.txt", "w") as f:
+        f.write(str(hardcoded_datastructure()))
+    # openai_get_datastructure("data/bloodtest-form.png")
     # log_instance_of_document(hardcoded_datastructure())
 if __name__ == "__main__":
     main()
+    from fbc_guidance import fbc_main
+    fbc_main()

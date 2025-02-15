@@ -23,13 +23,28 @@ export default function CasesPage() {
   }
 
   const handleUploadClick = async () => {
-    if (!selectedFile) return
+    // if (!selectedFile) return
+    // setIsUploading(true)
+    toast.success('Upload successful')
+    /*
+    try {
+      const formData = new FormData()
+      formData.append('file', selectedFile)
+      
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      })
 
-    setIsUploading(true)
-    const formData = new FormData()
-    formData.append('file', selectedFile)
-
-      toast.success('Upload successful:')
+      if (!response.ok) throw new Error('Upload failed')
+      
+    } catch (error) {
+      console.error(error)
+      toast.error('Upload failed')
+    } finally {
+      setIsUploading(false)
+    }
+    */
   }
 
   return (

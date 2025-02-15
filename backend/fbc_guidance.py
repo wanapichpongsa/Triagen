@@ -1,7 +1,7 @@
 import json
 
 def get_fbc_guidance(patient_data: dict) -> str:
-    with open('backend/fbc_guidance.json', 'r') as file:
+    with open('fbc_guidance.json', 'r') as file:
         fbc_guidance = json.load(file)
     
     message = ""
@@ -86,7 +86,7 @@ def text_to_speech(message: str) -> dict:
     response = requests.post(url, headers=headers, json=body)
     return response.json()
 
-def main():
+def fbc_main():
     patient_data = {
     "abnormality": "Anaemia",   # could be "Anaemia", "Polycythaemia", etc.
     "gender": "male",
@@ -108,6 +108,10 @@ def main():
         "test_outcome": test_outcome,
     }
 
+    print(json.dumps(message_constructor, indent=4))
+
+    with open("format/format1.txt", "a") as f:
+        f.write(f"\n\n\n\n {str(message_constructor)}")
     # RUNNING FUNCTIONS
     input_message = construct_message(message_constructor)
     print("Creating Input Message:\n", input_message)
@@ -115,4 +119,4 @@ def main():
     print("POST to Eleven Labs:\n", audio_response)
 
 if __name__ == "__main__":
-    main()
+    fbc_main()

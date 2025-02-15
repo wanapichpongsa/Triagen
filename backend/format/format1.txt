@@ -1,0 +1,83 @@
+{
+    "Lab": {
+        "Lab Number": null,
+        "NHS No.": null,
+        "Hospital No.": null,
+        "Address": null
+    },
+    "Patient Details": {
+        "Surname": null,
+        "Forename": null,
+        "Sex": null,
+        "DOB": null,
+        "Fasting": null,
+        "NHS/PP": null,
+        "Consultant/GP": null,
+        "Ward/Surgery": null
+    },
+    "Clinical Details and Drug Therapy": null,
+    "Requestor": {
+        "Name & Signature": null,
+        "Bleep No.": null
+    },
+    "Sample": {
+        "Date": null,
+        "Time": null,
+        "Urgent": null,
+        "Type": null
+    },
+    "Tests Requested": {
+        "Biochemistry": {
+            "Brown Top Gel Tube": {
+                "UE": false,
+                "Bone": false,
+                "Liver": false,
+                "Amylase": false,
+                "CRP": false,
+                "Lipids": false,
+                "Thyroid": false,
+                "Glucose Fasting/Random (Yellow Top)": false,
+                "HBA1c (Red Top)": false,
+                "Gent": false,
+                "Digoxin": false,
+                "B12/Folate": false,
+                "Ferritin": false,
+                "Cortisol 9am/Random": false,
+                "Immunoglobulins": false,
+                "Electrophoresis": false
+            }
+        },
+        "Haematology": {
+            "Red Top EDTA": {
+                "FBC": false,
+                "ESR": false,
+                "IM": false
+            },
+            "Green Top Citrate": {
+                "Clotting Screen": false,
+                "INR": false,
+                "D Dimer": false,
+                "Lupus Anticoag": false
+            }
+        },
+        "Immunology": {
+            "Separate Brown Top Tube": {
+                "ANCA": false,
+                "ANA": false,
+                "Anti-Cardiolipin Abs": false,
+                "Liver Autoantibodies": false,
+                "TTGA/Coeliac": false,
+                "Total IgE": false
+            }
+        },
+        "Other Tests": null
+    },
+    "Anti-Coagulant Therapy": null,
+    "Collected By": null,
+    "Date/Time Received": null,
+    "Additional Information": "For details on tests and sample tube requirements, refer to https://esneftpathology.nhs.uk or call 0300 303 5299."
+}
+
+
+
+ {'patient_fullname': 'John Doe', 'consultant': 'Dr.Henry Williams', 'test_outcome': 'Anaemia Referral: Refer if anaemia is severe, unexplained, or progressive'}
