@@ -137,11 +137,12 @@ def bloodtest_structure():
 
 
 def log_query(RAGIE_RETRIEVAL: str):
+    """NOTE: I don't know what to do here yet."""
     # Dummy data will be a blood test result doument.
     data = RAGIE_RETRIEVAL
 
-    system_prompt = 
-    query = 
+    system_prompt = ""
+    query = ""
     client = OpenAI(api_key=openai_api_key)
     response = client.chat.completions.create(
         model="gpt-4o-mini",
