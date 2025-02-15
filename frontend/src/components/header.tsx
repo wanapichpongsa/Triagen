@@ -1,9 +1,12 @@
+"use client"
+
 import { Bell, Search } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export function Header() {
   return (
@@ -12,7 +15,7 @@ export function Header() {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <Image src="/nhs-logo.svg" alt="NHS Logo" width={48} height={48} />
+              <Image src="/NHS Logo.jpeg" alt="NHS Logo" width={48} height={48} />
               <span className="ml-2 text-xl font-semibold text-gray-800 dark:text-white">NHS Triage Automation</span>
             </Link>
           </div>
@@ -26,9 +29,10 @@ export function Header() {
             <Button variant="ghost" size="icon">
               <Bell className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="ml-4">
-              <Image src="/placeholder-user.jpg" alt="User Avatar" width={32} height={32} className="rounded-full" />
-            </Button>
+            <Avatar className="ml-4">
+              <AvatarImage src="/placeholder-user.jpg" alt="User Avatar" />
+              <AvatarFallback>U</AvatarFallback>
+            </Avatar>
           </div>
         </div>
       </div>
