@@ -1,18 +1,23 @@
-import ollama
-import pdfplumber
+import os
+from dotenv import load_dotenv
+import requests
 
-client = ollama.Client()
+def get_instructions():
+    load_dotenv()  # Load environment variables
 
-def ollama_agent():
-    response = client.chat(model="deepseek-r1:8b", messages=[
-        {"role": "system", "content": "You are a concise assistant. Keep responses brief and to the point."},
-        {"role": "user", "content": "Say hello!"}
-    ])
-    print("Assistant response:", response['message']['content'])
-    return response['message']['content']
+    url = "https://api.ragie.ai/instructions"
+    api_key = os.getenv("RAGIE_API_KEY")
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"Bearer {api_key}"
+    }
+
+    response = requests.get(url, headers=headers)
+    print(response.text)
 
 def main():
-    ollama_agent()
-    
+    get_instructions()
+
 if __name__ == "__main__":
     main()
