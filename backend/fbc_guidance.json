@@ -1,0 +1,90 @@
+{
+    "Anaemia": {
+      "criteria": {
+        "men": "Hb < 130 g/L",
+        "women": "Hb < 115 g/L"
+      },
+      "evaluations": [
+        "Check Ferritin",
+        "Consider Hb electrophoresis if no previous test",
+        "Investigate ESR, LFT, B12, Folate, TFT, Renal function",
+        "Examine blood film and reticulocyte count",
+        "Consider myeloma screen if malignancy is suspected"
+      ],
+      "referral": {
+        "haematologist": "Refer if anaemia is severe, unexplained, or progressive"
+      }
+    },
+    "Polycythaemia": {
+      "criteria": {
+        "men": "Hb > 185 g/L and Hct > 0.52",
+        "women": "Hb > 160 g/L and Hct > 0.48"
+      },
+      "evaluations": [
+        "Assess WCC & Platelets",
+        "Determine ferritin levels (low = primary, normal = secondary)",
+        "Consider dehydration, smoking, obesity, or cardiopulmonary issues"
+      ],
+      "referral": {
+        "haematologist": "Refer if abnormalities persist or thrombotic events occur"
+      }
+    },
+    "Eosinophilia": {
+      "criteria": "Eosinophils > 0.44 x10^9/L",
+      "evaluations": [
+        "Review history for drug exposure, travel, or atopy",
+        "Repeat FBC and blood film within 1-2 weeks"
+      ],
+      "referral": {
+        "haematologist": "Refer if eosinophils exceed 1.5 x10^9/L and persist >3 months or rise without an obvious cause"
+      }
+    },
+    "Lymphocytes": {
+      "normal_range": "1.3 - 3.5 x10^9/L",
+      "abnormalities": {
+        "Lymphopenia": {
+          "referral": "Refer if lymphopenia is persistent or unexplained (consider drugs, infection, malignancy, etc.)"
+        },
+        "Lymphocytosis": {
+          "referral": "Refer urgently if count > 20 x10^9/L or if accompanied by lymphadenopathy, splenomegaly, anaemia, weight loss, or night sweats"
+        }
+      }
+    },
+    "Neutrophils": {
+      "normal_range": "2.0 - 7.5 x10^9/L",
+      "abnormalities": {
+        "Neutropenia": {
+          "thresholds": {
+            "severe": "< 1.0 x10^9/L",
+            "mild": "1.0 - 1.5 x10^9/L"
+          },
+          "referral": {
+            "urgent": "Refer urgently if severe in unwell or febrile patients",
+            "monitor": "Repeat FBC in 1 week for mild neutropenia"
+          }
+        },
+        "Neutrophilia": {
+          "referral": "Refer if count > 15 x10^9/L or if there is splenomegaly or persistent unexplained neutrophilia"
+        }
+      }
+    },
+    "Platelets": {
+      "normal_range": "150 - 400 x10^9/L",
+      "abnormalities": {
+        "Thrombocytopenia": {
+          "evaluation": "Repeat FBC and review blood film to rule out artefact",
+          "referral": {
+            "urgent": "Urgent same-day referral if < 20 x10^9/L or with bleeding",
+            "monitor": "Monitor monthly if 50-100 x10^9/L and refer if progressive or symptomatic"
+          }
+        },
+        "Thrombocytosis": {
+          "evaluation": "If asymptomatic, repeat FBC in 4-6 weeks",
+          "referral": {
+            "urgent": "Urgently refer if platelets > 600 x10^9/L with symptoms or > 1000 x10^9/L",
+            "haematology": "Refer to haematology if thrombocytosis is persistent and unexplained"
+          }
+        }
+      }
+    }
+  }
