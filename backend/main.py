@@ -70,7 +70,7 @@ def openai_get_datastructure(image_path: str) -> dict[str, any]:
         model="gpt-4-1106-preview",
         messages=[
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Extract the structure from this medical form: {extracted_text}"}
+            {"role": "user", "content": f"Output only the JSON object, nothing else. extracted_text: {extracted_text}"}
         ],
         max_tokens=1000
     )

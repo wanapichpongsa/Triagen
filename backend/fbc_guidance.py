@@ -44,6 +44,20 @@ def get_fbc_guidance(patient_data: dict) -> str:
 
     return message if message else None
 
+# Remove if you want to use ElevenLabs agent
+def construct_message(message_constructor: dict) -> str:
+    from openai import OpenAI
+    client = OpenAI()
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant that constructs messages for an ElevenLabs agent."},
+            {"role": "user", "content": "Output only the message, nothing else. message_constructor: " + str(message_constructor)}
+            ]
+    )
+
+
 from dotenv import load_dotenv
 import os
 import requests
@@ -53,19 +67,27 @@ elevenlabs_api_key = os.getenv("ELEVENLABS_API_KEY")
 
 """
 OLLIE: get the correct API endpoint and API key please
+method 1: https://elevenlabs.io/docs/conversational-ai/customization/personalization/dynamic-variables
+method 2: https://elevenlabs.io/docs/conversational-ai/customization/tools/server-tools
 """
-def get_patient_data(tree_outcome: str) -> dict:
+def text_to_speech(message: str) -> dict:
     BASE_URL = "https://api.elevenlabs.io/"
-    url = f"{BASE_URL}v1/text-to-speech/convert"
+    url = f"{BASE_URL}v2/text-to-speech/convert"
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
         "Authorization": f"Bearer {elevenlabs_api_key}"
     }
-    response = requests.post(url, headers=headers, json={"text": tree_outcome})
+    body = {
+        "text": message,
+        "model_id": "eleven_turbo_v2_5",
+        "output_format": "mp3_44_16000"
+    }
+    response = requests.post(url, headers=headers, json=body)
     return response.json()
 
-patient_data = {
+def main():
+    patient_data = {
     "abnormality": "Anaemia",   # could be "Anaemia", "Polycythaemia", etc.
     "gender": "male",
     "hb": 125,       # haemoglobin level
@@ -74,9 +96,23 @@ patient_data = {
     "lymphocyte_count": 1.0,
     "neutrophil_count": 0.9,
     "platelets": 80
-}
+    }
 
-tree_outcome = get_fbc_guidance(patient_data)
+    patient_fullname = "John Doe"
+    consultant = "Dr.Henry Williams"
+    test_outcome = get_fbc_guidance(patient_data)
 
-patient_data = get_patient_data(tree_outcome)
-print("POST to Eleven Labs:\n", patient_data)
+    message_constructor = {
+        "patient_fullname": patient_fullname,
+        "consultant": consultant,
+        "test_outcome": test_outcome,
+    }
+
+    # RUNNING FUNCTIONS
+    input_message = construct_message(message_constructor)
+    print("Creating Input Message:\n", input_message)
+    audio_response = text_to_speech(input_message)
+    print("POST to Eleven Labs:\n", audio_response)
+
+if __name__ == "__main__":
+    main()
