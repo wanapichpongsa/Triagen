@@ -1,57 +1,10 @@
 import os
 from dotenv import load_dotenv
-import requests
 import json
 from openai import OpenAI
 
-# API Configuration
-BASE_URL = "https://api.ragie.ai"
-DOCUMENTS_ENDPOINT = f"{BASE_URL}/documents"
-INSTRUCTIONS_ENDPOINT = f"{BASE_URL}/instructions"
-QUERY_ENDPOINT = f"{BASE_URL}/retrievals"
-
 load_dotenv()
-ragie_api_key = os.getenv("RAGIE_API_KEY")
 openai_api_key = os.getenv("OPENAI_API_KEY")
-
-headers = {
-    "accept": "application/json",
-    "content-type": "application/json",
-    "Authorization": f"Bearer {ragie_api_key}"
-}
-
-def get_documents() -> None:
-    response = requests.get(DOCUMENTS_ENDPOINT, headers=headers)
-    print(response.text + "\n")
-
-def create_instructions() -> None:
-    instruction_data = {
-        "name": "Medical Triage Assessment",
-        "active": True,
-        "scope": "document",
-        "prompt": "Analyze the patient's symptoms and medical history for triage assessment.",
-        "entity_schema": {
-            "type": "object",
-            "properties": {
-                "urgency_level": {
-                    "type": "string",
-                    "enum": ["priority_1", "priority_2", "priority_3", "priority_4", "priority_5"]
-                },
-                "symptoms": {
-                    "type": "array",
-                    "items": {"type": "string"}
-                },
-                "recommended_action": {
-                    "type": "string",
-                    "enum": ["emergency", "urgent_care", "primary_care", "self_care"] # or could be forms of medical treatment
-                }
-            },
-            "required": ["urgency_level", "symptoms", "recommended_action"]
-        }
-    }
-
-    response = requests.post(INSTRUCTIONS_ENDPOINT, headers=headers, json=instruction_data)
-    print(response.text+ "\n")
 
 def bloodtest_structure():
     form_data = {
