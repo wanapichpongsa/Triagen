@@ -1,7 +1,7 @@
 import json
 
 def get_fbc_guidance(patient_data: dict) -> str:
-    with open('fbc_guidance.json', 'r') as file:
+    with open('./protocol/fbc_guidance.json', 'r') as file:
         fbc_guidance = json.load(file)
     
     message = ""
@@ -109,9 +109,8 @@ def fbc_main():
     }
 
     print(json.dumps(message_constructor, indent=4))
-
-    with open("format/format1.txt", "a") as f:
-        f.write(f"\n\n\n\n {str(message_constructor)}")
+    #TODO: Json -> SUPABASE or CLOUDFLARE R2
+    
     # RUNNING FUNCTIONS
     input_message = construct_message(message_constructor)
     print("Creating Input Message:\n", input_message)

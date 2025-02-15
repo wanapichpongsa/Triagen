@@ -6,6 +6,7 @@ import pdfplumber
 import json
 import requests
 import base64
+import re
 
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
@@ -75,115 +76,48 @@ def openai_get_datastructure(image_path: str) -> dict[str, any]:
         ],
         max_tokens=1000
     )
-    print(response.choices[0].message.content)
+    return response.choices[0].message.content
 
-def hardcoded_datastructure() -> dict[str, any]:
-    # This is basically what I want get_datastructure() to return:
-    form_data = {
-        "Lab": {
-            "Lab Number": None,
-            "NHS No.": None,
-            "Hospital No.": None,
-            "Address": None
-        },
-        "Patient Details": {
-            "Surname": None,
-            "Forename": None,
-            "Sex": None,
-            "DOB": None,
-            "Fasting": None,
-            "NHS/PP": None,
-            "Consultant/GP": None,
-            "Ward/Surgery": None
-        },
-        "Clinical Details and Drug Therapy": None,
-        "Requestor": {
-            "Name & Signature": None,
-            "Bleep No.": None
-        },
-        "Sample": {
-            "Date": None,
-            "Time": None,
-            "Urgent": None,
-            "Type": None  # Blood, Urine, CSF
-        },
-        "Tests Requested": {
-            "Biochemistry": {
-                "Brown Top Gel Tube": {
-                    "UE": False,
-                    "Bone": False,
-                    "Liver": False,
-                    "Amylase": False,
-                    "CRP": False,
-                    "Lipids": False,
-                    "Thyroid": False,
-                    "Glucose Fasting/Random (Yellow Top)": False,
-                    "HBA1c (Red Top)": False,
-                    "Gent": False,
-                    "Digoxin": False,
-                    "B12/Folate": False,
-                    "Ferritin": False,
-                    "Cortisol 9am/Random": False,
-                    "Immunoglobulins": False,
-                    "Electrophoresis": False
-                }
-            },
-            "Haematology": {
-                "Red Top EDTA": {
-                    "FBC": False,
-                    "ESR": False,
-                    "IM": False
-                },
-                "Green Top Citrate": {
-                    "Clotting Screen": False,
-                    "INR": False,
-                    "D Dimer": False,
-                    "Lupus Anticoag": False
-                }
-            },
-            "Immunology": {
-                "Separate Brown Top Tube": {
-                    "ANCA": False,
-                    "ANA": False,
-                    "Anti-Cardiolipin Abs": False,
-                    "Liver Autoantibodies": False,
-                    "TTGA/Coeliac": False,
-                    "Total IgE": False
-                }
-            },
-            "Other Tests": None
-        },
-        "Anti-Coagulant Therapy": None,
-        "Collected By": None,
-        "Date/Time Received": None,
-        "Additional Information": "For details on tests and sample tube requirements, refer to https://esneftpathology.nhs.uk or call 0300 303 5299."
-    }
-    return json.dumps(form_data, indent=4)
+def edit_datastructure(data_structure: dict) -> dict:
+    # editing GUI
+    # tkinter?
+    return {"test": "test"}
+    
 
-def log_instance_of_document(data_structure: dict) -> dict[str, any]:
-    """NOTE: I don't know what to do here yet."""
-    # Dummy data will be a blood test result doument.
-
-    system_prompt = ""
-    query = ""
-    client = OpenAI(api_key=openai_api_key)
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": query}
-            ]
-    )
-    print(response.choices[0].message.content)
-    with open ("format/format1.txt", "w") as f:
-        f.write(response.choices[0].message.content)
+def log_instance_of_document(data_structure: dict) -> None:
+    data_structure = json.dumps(data_structure, indent=4)
+    
+    # Get next file number
+    format_dir = "format"
+    existing_files = len([f for f in os.listdir(format_dir) if f.endswith('.json')])
+    next_num = existing_files + 1
+    
+    # Write to new file
+    filename = f"format/format{next_num}.json"
+    with open(filename, "w") as f:
+        f.write(data_structure)
 
 def main():
-    print(str(hardcoded_datastructure()))
-    with open ("format/format1.txt", "w") as f:
-        f.write(str(hardcoded_datastructure()))
-    # openai_get_datastructure("data/bloodtest-form.png")
-    # log_instance_of_document(hardcoded_datastructure())
+    # TODO: GET HASH FROM CF and if same openai fn not allowed to run
+    response: str = openai_get_datastructure("data/bloodtest-form.png")
+    json_response = json.loads(response1, indent=4, strict=False) # why strict=False?
+    try:
+        while True:
+            continue_loop = input("Correct format? (y/n/fin)")
+            # Match any number of repeated characters
+            if re.match(r"^y+e*s*$", continue_loop.lower()):  # yes, yeees, s, sss
+                log_instance_of_document(json_response)
+                break
+            elif re.match(r"^n+o*$", continue_loop.lower()):  # no, nooo, n
+                response1 = edit_datastructure(response1)
+            elif re.match(r"^f+i*n+i*s*h*$", continue_loop.lower()):  # fin, finish, fiiinish
+                log_instance_of_document(response1)
+                break
+            else:
+                print("Invalid input. Please enter 'y/yes', 'n/no', or 'fin/finish'")
+    except KeyboardInterrupt: #TODO: Good practice to have here?
+        print("Exiting...")
+
 if __name__ == "__main__":
     main()
     from fbc_guidance import fbc_main
