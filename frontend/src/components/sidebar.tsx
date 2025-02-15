@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChart2, FileText, Home, Settings, Users } from "lucide-react"
+import { BarChart2, FileText, Home, Map, Settings, Users } from "lucide-react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,12 @@ export function Sidebar() {
           <Link href="/">
             <Home className="mr-3 h-5 w-5" />
             Dashboard
+          </Link>
+        </Button>
+        <Button variant="ghost" className="w-full justify-start" asChild>
+          <Link href="/map">
+            <Map className="mr-3 h-5 w-5" />
+            Map
           </Link>
         </Button>
         <Button variant="ghost" className="w-full justify-start" asChild>
@@ -30,7 +36,7 @@ export function Sidebar() {
         <Button variant="ghost" className="w-full justify-start" asChild>
           <Link href="/users">
             <Users className="mr-3 h-5 w-5" />
-            Users
+            Patients
           </Link>
         </Button>
         <Button variant="ghost" className="w-full justify-start" asChild>

@@ -63,7 +63,7 @@ export default function Home() {
             <div className="grid gap-6 mb-8 md:grid-cols-2">
               <Card className="col-span-2">
                 <CardHeader>
-                  <CardTitle>Triage Processing Statistics</CardTitle>
+                  <CardTitle>Triages Per Week</CardTitle>
                 </CardHeader>
                 <CardContent className="pl-2">
                   <TriageChart />
