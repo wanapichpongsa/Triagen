@@ -29,22 +29,7 @@ export default function CasesPage() {
     const formData = new FormData()
     formData.append('file', selectedFile)
 
-    try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      })
-      
-      if (!response.ok) throw new Error('Upload failed')
-      
-      const data = await response.json()
-      toast.success('Upload successful:', data)
-    } catch (error) {
-      console.error('Upload error:', error)
-      toast.error('Upload failed')
-    } finally {
-      setIsUploading(false)
-    }
+      toast.success('Upload successful:')
   }
 
   return (
