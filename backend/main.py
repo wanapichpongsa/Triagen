@@ -30,24 +30,30 @@ def get_datastructure():
         headers=headers,
         json=retrieval_data
     )
+    document_chunks = document_chunks.json()
     
-    formatted_json = json.dumps(document_chunks.json(), indent=2)
-    document_id = "f4ac0e9d-01f4-4f6d-ad68-ad7a14801266"
+    """ Print each chunk's document_id
+    for chunk in document_chunks["scored_chunks"]:
+        print(f"Document ID: {chunk['document_id']}")
+        print(f"Document Name: {chunk['document_name']}\n")
+        print(f"Text: {chunk['text']}\n")
+    """
+    document_id = "3c270c93-fec7-4663-8d5e-1e8f59ffacad"
     
-    # Extract text for specific document ID
-    ragie_response = next(
-        (chunk["text"] for chunk in document_chunks.json()["scored_chunks"] 
-         if chunk["document_id"] == document_id),
-        None
-    )
-    
-    print(ragie_response)
+    # Collect all chunks from the specified document
+    ragie_response = [
+        chunk["text"] for chunk in document_chunks["scored_chunks"]
+        if chunk["document_id"] == document_id
+    ]
+    for i, text in enumerate(ragie_response):
+        print(f"Chunk {i} from document:", text, "\n\n\n\n\n")
+    return ragie_response
     """
     client = OpenAI(api_key=openai_api_key)
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "user", "content": "Return the datastructure of this medical document in dictionary format."}
+            {"role": "user", "content": ""}
         ]
     )
     print(response.choices[0].message.content)
