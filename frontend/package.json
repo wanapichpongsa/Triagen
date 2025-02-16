@@ -26,7 +26,8 @@
     "react-hot-toast": "^2.5.2",
     "recharts": "^2.15.1",
     "tailwind-merge": "^3.0.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "wrangler": "^3.109.1"
   },
   "devDependencies": {
     "@types/node": "^20",
