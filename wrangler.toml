@@ -1,4 +1,0 @@
-[[r2_buckets]]
-# use --env .env flag to reference variables
-binding = "$R2_BINDING"
-bucket_name = "$R2_BUCKET_NAME"
