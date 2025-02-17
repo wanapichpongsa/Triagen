@@ -2,10 +2,8 @@ import os
 from dotenv import load_dotenv
 
 from openai import OpenAI
-import pdfplumber
 import json
 import requests
-import base64
 import re
 
 load_dotenv()
@@ -74,7 +72,7 @@ def openai_get_datastructure(image_path: str) -> dict[str, any]:
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"Output only the JSON object, nothing else. extracted_text: {extracted_text}"}
         ],
-        max_tokens=1000
+        max_tokens=1000 # TODO: Figure out token accounting
     )
     return response.choices[0].message.content
 
@@ -98,19 +96,19 @@ def log_instance_of_document(data_structure: dict) -> None:
         f.write(data_structure)
 
 def main():
+    WRANGLER_SERVER_URL: str = "https://localhost:8787"
     # TODO: GET HASH FROM CF and if same openai fn not allowed to run
     response: str = openai_get_datastructure("data/bloodtest-form.png")
     json_response = json.loads(response1, indent=4, strict=False) # why strict=False?
     try:
         while True:
             continue_loop = input("Correct format? (y/n/fin)")
-            # Match any number of repeated characters
-            if re.match(r"^y+e*s*$", continue_loop.lower()):  # yes, yeees, s, sss
+            if re.match(r"^y+e*s*$", continue_loop.lower()):
                 log_instance_of_document(json_response)
                 break
-            elif re.match(r"^n+o*$", continue_loop.lower()):  # no, nooo, n
+            elif re.match(r"^n+o*$", continue_loop.lower()):
                 response1 = edit_datastructure(response1)
-            elif re.match(r"^f+i*n+i*s*h*$", continue_loop.lower()):  # fin, finish, fiiinish
+            elif re.match(r"^f+i*n+i*s*h*$", continue_loop.lower()):
                 log_instance_of_document(response1)
                 break
             else:
