@@ -14,7 +14,7 @@ import { Sidebar } from "@/components/sidebar"
 import toast, { Toaster } from "react-hot-toast"
 
 export default function CasesPage() {
-  const [isUploading, setIsUploading] = useState(false)
+  const [isUploading, setIsUploading] = useState(false) // used for upload button 'upload' => 'uploading...' state
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,10 +23,8 @@ export default function CasesPage() {
   }
 
   const handleUploadClick = async () => {
-    // if (!selectedFile) return
-    // setIsUploading(true)
-    toast.success('Upload successful')
-    /*
+    if (!selectedFile) return
+    setIsUploading(true)
     try {
       const formData = new FormData()
       formData.append('file', selectedFile)
@@ -35,16 +33,15 @@ export default function CasesPage() {
         method: 'POST',
         body: formData
       })
-
       if (!response.ok) throw new Error('Upload failed')
-      
+      toast.success('Upload successful')
+      setSelectedFile(null)
     } catch (error) {
       console.error(error)
       toast.error('Upload failed')
     } finally {
       setIsUploading(false)
     }
-    */
   }
 
   return (
