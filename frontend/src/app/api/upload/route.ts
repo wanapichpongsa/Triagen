@@ -18,7 +18,6 @@ export async function POST(request: Request) {
     [Binary file data]
     ----boundary----
     */
-   console.log(formData)
     
     const destinationEndpoint = "http://127.0.0.1:8080/api/triagen-engine"
     const response = await fetch(destinationEndpoint, {

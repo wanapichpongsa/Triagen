@@ -17,7 +17,7 @@ export default function CasesPage() {
   const [isUploading, setIsUploading] = useState(false) // used for upload button 'upload' => 'uploading...' state
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     setSelectedFile(file || null)
   }
@@ -34,8 +34,9 @@ export default function CasesPage() {
         body: formData
       })
       if (!response.ok) throw new Error('Upload failed')
+      const fileInput = document.getElementById('caseFile') as HTMLInputElement
+      if (fileInput) fileInput.value = ''
       toast.success('Upload successful')
-      setSelectedFile(null)
     } catch (error) {
       console.error(error)
       toast.error('Upload failed')
@@ -61,10 +62,12 @@ export default function CasesPage() {
                   <Label htmlFor="caseFile">Case File</Label>
                   <Input 
                     id="caseFile" 
-                    type="file" 
+                    type="file"
                     onChange={handleFileSelect}
                     disabled={isUploading}
-                  />
+                    multiple={false}
+                    key={selectedFile ? 'has-file' : 'no-file'}
+                  /> {/* Set multiple to true when can handle multiple files */}
                 </div>
                 <Button className="mt-6" onClick={handleUploadClick} disabled={isUploading}>
                   <UploadCloud className="mr-2 h-4 w-4" />
