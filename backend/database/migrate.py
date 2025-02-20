@@ -1,4 +1,4 @@
-import psycopg2
+from .connection import get_db_connection
 from tabulate import tabulate
 from contextlib import contextmanager
 import os
@@ -9,32 +9,9 @@ import logging
 
 load_dotenv()
 
-@contextmanager
-def get_db_connection():
-    """Context manager for database connections"""
-    conn = None
-    try:
-        conn = psycopg2.connect(
-            dbname=os.getenv("DB_NAME", "public"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            host=os.getenv("DB_HOST"),
-            port=os.getenv("DB_PORT")
-        )
-        yield conn
-    finally:
-        if conn:
-            conn.close()
-
 def init_database(db_name: str):
    try:
-      conn = psycopg2.connect(
-          dbname="postgres",
-          user=os.getenv("DB_USER"),
-          password=os.getenv("DB_PASSWORD"),
-          host=os.getenv("DB_HOST"),
-          port=os.getenv("DB_PORT")
-      )
+      conn = get_db_connection()
       conn.autocommit = True
       cur = conn.cursor()
 
@@ -47,7 +24,7 @@ def init_database(db_name: str):
       # Create database
       cur.execute(f"CREATE DATABASE {db_name}")
       print(f"Database {db_name} created successfully")
-      conn.close()
+
    except psycopg2.Error as e:
       print(f"Database creation error: {e}")
       raise
