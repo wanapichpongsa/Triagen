@@ -116,7 +116,6 @@ def init_tables():
                     CONSTRAINT documents_unique_composite UNIQUE (uuid, filename, filehash)
                 )
             """)
-            show_documents_tables()
 
             # Create processed_documents table with UUID foreign key
             logging.info("Creating processed_documents table")
@@ -132,7 +131,6 @@ def init_tables():
                     FOREIGN KEY (doc_uuid, filename, filehash) REFERENCES documents(uuid, filename, filehash)
                 )
             """)
-            show_processed_documents_tables()
             conn.commit()
             print("Database tables initialized successfully")
 
@@ -140,6 +138,24 @@ def init_tables():
         print(f"Database initialization error: {e}")
         raise
     
+def drop_tables():
+    """Drop all tables if they exist"""
+    try:
+        with get_db_connection() as conn:
+            cur = conn.cursor()
+            
+            # Drop tables in correct order (processed_documents depends on documents)
+            cur.execute("""
+                DROP TABLE IF EXISTS processed_documents;
+                DROP TABLE IF EXISTS documents;
+            """)
+            conn.commit()
+            print("Tables dropped successfully")
+            
+    except psycopg2.Error as e:
+        print(f"Error dropping tables: {e}")
+        raise
+
 def migrate_existing_documents() -> None:
     """Migrate existing documents to the database"""
     if os.listdir("data"):
@@ -155,6 +171,7 @@ def migrate_existing_documents() -> None:
                         cur.execute("INSERT INTO documents (filename, filehash) VALUES (%s, %s)", (filename, file_hash))
                         conn.commit()
                         print(f"\t{index+1}/{len(os.listdir('data'))} documents migrated")
+            show_documents_tables()
 
       except psycopg2.Error as e:
         print(f"Database migration error: {e}")
@@ -190,12 +207,14 @@ def migrate_existing_data_structures() -> None:
                     cur.execute("INSERT INTO processed_documents (doc_uuid, filename, filehash, data_structure) VALUES (%s, %s, %s, %s)", (uuid, docname, filehash, data_structure_json))
                     conn.commit()
                     print(f"\t{index+1}/{len(os.listdir('format'))} documents migrated")
+                    show_processed_documents_tables()
       except psycopg2.Error as e:
         print(f"Database migration error: {e}")
         raise
 
 if __name__ == "__main__":
     init_database("public")
+    drop_tables()
     init_tables()
     migrate_existing_documents()
     migrate_existing_data_structures()
