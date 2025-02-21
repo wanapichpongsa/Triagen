@@ -47,6 +47,8 @@ def openai_get_datastructure(filename: str) -> str:
     import pytesseract
     from PIL import Image
 
+    # have different document handlers for different document types (pdf -> pdfplumber, documentscan -> image(png, jpg) -> ocr)
+    # BREAKDOWN how each document is handled, maybe how each format originated!
     try:
         # Read and encode image
         image = Image.open(f"database/data/{filename}")
