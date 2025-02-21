@@ -1,15 +1,9 @@
-import os
-from dotenv import load_dotenv
-
-from openai import OpenAI
 import json
 import re
 import hashlib
 import psycopg2
-from database.migrate import init_tables
 from database.connection import get_db_connection
-
-load_dotenv()
+from ocr import gemini_vision
 
 def create_hash(filename: str) -> tuple[str, str]:
     """Create and store file hash, returns (uuid, hash)"""
@@ -41,50 +35,6 @@ def get_hash(hash: str) -> bool:
             """, (hash,))
         result = cur.fetchone()
         return result is not None
-
-def openai_get_datastructure(filename: str) -> str:
-    system_prompt = "You are a medical form parser. Extract the form structure and return it as a JSON object."
-    import pytesseract
-    from PIL import Image
-
-    # have different document handlers for different document types (pdf -> pdfplumber, documentscan -> image(png, jpg) -> ocr)
-    # BREAKDOWN how each document is handled, maybe how each format originated!
-    try:
-        # Read and encode image
-        image = Image.open(f"database/data/{filename}")
-
-        # Use OCR to extract text from the image
-        extracted_text = pytesseract.image_to_string(image)
-        if not extracted_text:
-            raise Exception("No text extracted from image")
-        
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        response = client.chat.completions.create(
-            model="gpt-4-1106-preview",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Output only the JSON object, nothing else. extracted_text: {extracted_text}"}
-            ],
-            max_tokens=1000
-        )
-        message = response.choices[0].message.content
-        
-        # Validate that the response is valid JSON before saving
-        try:
-            json.loads(message, strict=False)  # Test if parseable
-        except json.JSONDecodeError:
-            raise Exception(f"OpenAI returned invalid JSON: {message}")
-
-        # Save response for debugging
-        os.makedirs("database/response", exist_ok=True)  # Create directory if it doesn't exist
-        with open(f"database/response/openai_response_{filename}.json", "w") as f:
-            f.write(message)
-            
-        return message
-
-    except Exception as e:
-        print(f"Error in openai_get_datastructure: {e}")
-        raise
 
 def edit_datastructure(data_structure: dict) -> dict:
     # editing GUI
@@ -124,7 +74,7 @@ def engine(filename: str):
         print("Error creating hash. Exiting...")
         return
     if not get_hash(hash):
-        response1: str = openai_get_datastructure(filename)
+        response1: str = gemini_vision(filename, debug=True) # be weary of ```json``` being interpreted as str
         json_data = json.loads(response1, strict=False) # allow control characters \n
         try:
             while True:
