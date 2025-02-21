@@ -15,7 +15,7 @@ def gemini_vision(filename: str, debug: bool = False) -> str:
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
         model="gemini-2.0-flash",
-        contents=["Only output a JSON object of the document structure, nothing else", image])
+        contents=["Only output a JSON object of the document structure, nothing else", image]) # Have the json object be 'production ready' e.g., typecasting, header: interface kv pair like bloodtest-form.json
     if debug:
         with open(f"database/debug/{filename}_gemini_results.txt", 'w') as f:
             f.write(response.text)

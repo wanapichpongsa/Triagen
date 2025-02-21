@@ -1,0 +1,120 @@
+{
+  "formTitle": "EHS & HER CCG WOUND CARE REFERRAL FORM",
+  "patientInformation": {
+    "practice": {
+      "label": "Practice",
+      "fields": [
+        "GP",
+        "Patient Name",
+        "Patient Address"
+      ]
+    },
+    "referrerInformation": {
+      "label": "Referred by",
+      "fields": [
+        "Referrer Contact Number",
+        "Referrer Email"
+      ]
+    },
+    "consent": {
+      "fields": [
+        "Consent for referral including transfer of personal data and medical photography? Yes / No",
+        "Does the person have capacity to give consent? If not, has this referral been completed in the person's best interest? Yes / No"
+      ]
+    },
+    "patientDetails": {
+      "fields": [
+        "Patient DOB",
+        "Patient NHS No",
+        "Patient Phone No"
+      ]
+    },
+    "referralDetails": {
+      "fields": [
+        "Referral Date",
+        "Patient Ethnic Origin",
+        "Urgency of Referral: Low / Medium / High"
+      ]
+    }
+  },
+  "woundDetailsSection": {
+    "title": "WOUND DETAILS",
+    "fields": [
+      "Type of wound",
+      "Location of wound",
+      "Date of Onset",
+      "BMI"
+    ],
+    "pressureUlcers": {
+      "title": "PRESSURE ULCERS",
+      "fields": [
+        "Pressure ulcer grade: 1 / 2 / 3 / 4",
+        "DTI / Unstageable"
+      ],
+      "diabeticFootUlcer": {
+        "title": "DIABETIC FOOT ULCER",
+        "fields": [
+          "Grade (Texas)",
+          "Charcot joint: Yes / No"
+        ]
+      },
+      "waterlowScore": {
+        "fields": [
+          "Waterlow score: At risk / High risk / Very high risk"
+        ]
+      }
+    },
+    "equipment": {
+      "title": "Pressure reducing/relieving equipment",
+      "fields": [
+        "Domestic Mattress",
+        "Static Pressure relieving Mattress",
+        "Referred to DFU clinic: Yes / No",
+        "Dynamic Air Mattress",
+        "Other:",
+        "Please specify"
+      ],
+      "fields2": [
+        "Modular cushion",
+        "Domesic mattress",
+        "Slate at cushion",
+        "Alternating cushion"
+      ],
+      "fields3": [
+        "Heels offloaded (static air)",
+        "Heels placed on the floor",
+        "Blood sugars stable: Yes / No"
+      ],
+      "fields4": [
+        "Other"
+      ]
+    },
+    "fields5": [
+      "Mobility: Bed bound / Chair bound / Fully mobile",
+      "Mobile with Aid"
+    ]
+  },
+  "nutritionSection": {
+    "title": "Nutrition",
+    "fields": [
+      "MUST score",
+      "Diet: Adequate / Inadequate / Supplements: Yes / No",
+      "Photograph attached (sent): Yes / No (referrals will not be processed without images)",
+      "Doppler results: N/A",
+      "Healing Status: Wound healing / Deteriorating / Static > low / Static < low",
+      "Left ABP",
+      "Right ABP",
+      "Exudate: None / Minimal / Moderate / High",
+      "Colour"
+    ]
+  },
+  "treatmentSection": {
+    "title": "Current Wound Treatment",
+    "fields": [
+      "Wound Infection: Yes / No If yes state infection present",
+      "Wound swab taken: Yes / No",
+      "Antibiotics commenced / requested: Yes / No",
+      "Other symptoms: Cellulitis / Increased exudate / Pain / Malodour / Pyrexia"
+    ]
+  }
+}
