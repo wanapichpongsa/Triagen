@@ -6,48 +6,40 @@ import json
 from dotenv import load_dotenv
 import hashlib
 import logging
+import psycopg2
 
 load_dotenv()
 
 def init_database(db_name: str):
-   try:
-      conn = get_db_connection()
-      conn.autocommit = True
-      cur = conn.cursor()
+    conn = get_db_connection()
+    conn.autocommit = True
+    cur = conn.cursor()
 
-      # Check if database already exists
-      cur.execute(f"SELECT 1 FROM pg_database WHERE datname = '{db_name}'")
-      if cur.fetchone():
-         print(f"Database {db_name} already exists")
-         return
+    # Check if database already exists
+    cur.execute(f"SELECT 1 FROM pg_database WHERE datname = '{db_name}'")
+    if cur.fetchone():
+        print(f"Database {db_name} already exists")
+        return
 
-      # Create database
-      cur.execute(f"CREATE DATABASE {db_name}")
-      print(f"Database {db_name} created successfully")
-
-   except psycopg2.Error as e:
-      print(f"Database creation error: {e}")
-      raise
+    # Create database
+    cur.execute(f"CREATE DATABASE {db_name}")
+    print(f"Database {db_name} created successfully")
 
 def show_documents_tables():
-    try:
-        with get_db_connection() as conn:
-            cur = conn.cursor()
-            
-            # Show documents table
-            print("\n=== Documents Table ===")
-            cur.execute("""
-                SELECT id, uuid, filename, LEFT(filehash, 8) as hash_preview, 
-                       created_at 
-                FROM documents 
-                ORDER BY id
-            """)
-            columns = [desc[0] for desc in cur.description]
-            results = cur.fetchall()
-            print(tabulate(results, headers=columns, tablefmt='psql'))
-    except psycopg2.Error as e:
-        print(f"Database error: {e}")
-        raise
+    with get_db_connection() as conn:
+        cur = conn.cursor()
+        
+        # Show documents table
+        print("\n=== Documents Table ===")
+        cur.execute("""
+            SELECT id, uuid, filename, LEFT(filehash, 8) as hash_preview, 
+                   created_at 
+            FROM documents 
+            ORDER BY id
+        """)
+        columns = [desc[0] for desc in cur.description]
+        results = cur.fetchall()
+        print(tabulate(results, headers=columns, tablefmt='psql'))
 
 def show_processed_documents_tables():
     try:
@@ -73,48 +65,43 @@ def show_processed_documents_tables():
    
 def init_tables():
     """Initialize database tables if they don't exist"""
-    try:
-        with get_db_connection() as conn:
-            cur = conn.cursor()
+    with get_db_connection() as conn:
+        cur = conn.cursor()
 
-            # Create UUID extension if it doesn't exist
-            logging.info("Creating UUID extension")
-            cur.execute("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"")
+        # Create UUID extension if it doesn't exist
+        logging.info("Creating UUID extension")
+        cur.execute("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"")
 
-            # Create documents table with composite key
-            logging.info("Creating documents table")
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS documents (
-                    id BIGSERIAL PRIMARY KEY,
-                    uuid UUID DEFAULT uuid_generate_v4(),
-                    filename TEXT NOT NULL,
-                    filehash TEXT NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    CONSTRAINT documents_unique_composite UNIQUE (uuid, filename, filehash)
-                )
-            """)
+        # Create documents table with composite key
+        logging.info("Creating documents table")
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS documents (
+                id BIGSERIAL PRIMARY KEY,
+                uuid UUID DEFAULT uuid_generate_v4(),
+                filename TEXT NOT NULL,
+                filehash TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                CONSTRAINT documents_unique_composite UNIQUE (uuid, filename, filehash)
+            )
+        """)
 
-            # Create processed_documents table with UUID foreign key
-            logging.info("Creating processed_documents table")
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS processed_documents (
-                    id BIGSERIAL PRIMARY KEY,
-                    doc_uuid UUID NOT NULL,
-                    filename TEXT NOT NULL,
-                    filehash TEXT NOT NULL,
-                    data_structure JSONB NOT NULL,
-                    protocol JSONB,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    FOREIGN KEY (doc_uuid, filename, filehash) REFERENCES documents(uuid, filename, filehash)
-                )
-            """)
-            conn.commit()
-            print("Database tables initialized successfully")
+        # Create processed_documents table with UUID foreign key
+        logging.info("Creating processed_documents table")
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS processed_documents (
+                id BIGSERIAL PRIMARY KEY,
+                doc_uuid UUID NOT NULL,
+                filename TEXT NOT NULL,
+                filehash TEXT NOT NULL,
+                data_structure JSONB NOT NULL,
+                protocol JSONB,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (doc_uuid, filename, filehash) REFERENCES documents(uuid, filename, filehash)
+            )
+        """)
+        conn.commit()
+        print("Database tables initialized successfully")
 
-    except psycopg2.Error as e:
-        print(f"Database initialization error: {e}")
-        raise
-    
 def drop_tables():
     """Drop all tables if they exist"""
     try:
@@ -190,8 +177,12 @@ def migrate_existing_data_structures() -> None:
         raise
 
 if __name__ == "__main__":
-    init_database("public")
-    drop_tables()
-    init_tables()
+    try:
+        # init_database("public")
+        drop_tables()
+        init_tables()
+    except psycopg2.Error as e:
+        print(f"Database error: {e}")
+        raise
     migrate_existing_documents()
     migrate_existing_data_structures()
