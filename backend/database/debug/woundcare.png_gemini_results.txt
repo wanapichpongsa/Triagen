@@ -1,122 +1,137 @@
 ```json
 {
-  "formTitle": "EHS & HER CCG WOUND CARE REFERRAL FORM",
-  "patientInformation": {
-    "practice": {
-      "label": "Practice",
-      "fields": [
-        "GP",
-        "Patient Name",
-        "Patient Address"
-      ]
-    },
-    "referrerInformation": {
-      "label": "Referred by",
-      "fields": [
-        "Referrer Contact Number",
-        "Referrer Email"
-      ]
-    },
-    "consent": {
-      "fields": [
-        "Consent for referral including transfer of personal data and medical photography? Yes / No",
-        "Does the person have capacity to give consent? If not, has this referral been completed in the person's best interest? Yes / No"
-      ]
-    },
-    "patientDetails": {
-      "fields": [
-        "Patient DOB",
-        "Patient NHS No",
-        "Patient Phone No"
-      ]
-    },
-    "referralDetails": {
-      "fields": [
-        "Referral Date",
-        "Patient Ethnic Origin",
-        "Urgency of Referral: Low / Medium / High"
-      ]
-    }
-  },
-  "woundDetailsSection": {
-    "title": "WOUND DETAILS",
-    "fields": [
-      "Type of wound",
-      "Location of wound",
-      "Date of Onset",
-      "BMI"
-    ],
-    "pressureUlcers": {
-      "title": "PRESSURE ULCERS",
-      "fields": [
-        "Pressure ulcer grade: 1 / 2 / 3 / 4",
-        "DTI / Unstageable"
-      ],
-      "diabeticFootUlcer": {
-        "title": "DIABETIC FOOT ULCER",
-        "fields": [
-          "Grade (Texas)",
-          "Charcot joint: Yes / No"
-        ]
+  "EHS & H&R CCG WOUND CARE REFERRAL FORM": {
+    "Practice:": null,
+    "GP": null,
+    "Patient Name:": null,
+    "Patient Address:": null,
+    "Referred by:": null,
+    "Referrer Contact Number": null,
+    "Referrer Email": null,
+    "Consent for referral including transfer of personal data\nand medical photography? Yes": null,
+    "Does the person have capacity to give\nconsent? If not, has this referral been\ncompleted in the person's best interest?": null,
+    "Patient DOB:": null,
+    "Patient NHS No:": null,
+    "Patient Phone No": null,
+    "Referral Date:": null,
+    "Patient Ethnic Origin:": null,
+    "Urgency of Referral: Low": null,
+    "WOUND DETAILS": {
+      "Type of wound": null,
+      "Location of wound": null,
+      "Date of Onset:": null,
+      "PRESSURE ULCERS:": {
+        "Pressure ulcer grade:": {
+          "1": null,
+          "2": null,
+          "3": null,
+          "4": null
+        },
+        "DTI:": null,
+        "Unstageable": null,
+        "Waterlow score:": {
+          "At risk": null,
+          "High risk": null,
+          "Very high risk": null
+        },
+        "Pressure reducing/relieving equipment:": {
+          "Domestic Mattress": null,
+          "Static Pressure relieving Mattress": null,
+          "Dynamic Air Mattress": null,
+          "Other": null,
+          "Please specify:": null,
+          "Modular cushion": null,
+          "Demeske mattress": null,
+          "Static air": null,
+          "Alternating cushion": null,
+          "Heels offloaded (static air)": null,
+          "Heels placed on the\nfloor": null,
+          "Other:": null
+        }
       },
-      "waterlowScore": {
-        "fields": [
-          "Waterlow score: At risk / High risk / Very high risk"
-        ]
+      "BMI:": null,
+      "DIABETIC FOOT ULCER": {
+        "Grade:": "(Texas)"
+      },
+      "Charcot joint:": {
+        "Yes": null,
+        "No": null
+      },
+      "Referred to DFU clinic:": {
+        "Yes": null,
+        "No": null
+      },
+      "Previous amputation:": {
+        "Yes": null,
+        "No": null
+      },
+      "Referred to Vascular TVN:": {
+        "Yes": null,
+        "No": null
+      },
+      "Bone tendon exposed:": {
+        "Yes": null,
+        "No": null
+      },
+      "Multiple ulcer sites:": {
+        "Yes": null,
+        "No": null
+      },
+      "Blood sugars stable:": {
+        "Yes": null,
+        "No": null
+      },
+      "Recent HBA1c:": null
+    },
+    "Mobility": {
+      "Bed bound": null,
+      "Chair bound": null,
+      "Fully mobile": null,
+      "Mobile with Aid": null
+    },
+    "Nutrition:": {
+      "MUST score": null,
+      "Diet:": {
+        "Adequate": null,
+        "Inadequate": null,
+        "Supplements:": null
       }
     },
-    "equipment": {
-      "title": "Pressure reducing/relieving equipment",
-      "fields": [
-        "Domestic Mattress",
-        "Static Pressure relieving Mattress",
-        "Referred to DFU clinic: Yes / No",
-        "Dynamic Air Mattress",
-        "Other:",
-        "Please specify"
-      ],
-      "fields2": [
-        "Modular cushion",
-        "Domesic mattress",
-        "Slate at cushion",
-        "Alternating cushion"
-      ],
-      "fields3": [
-        "Heels offloaded (static air)",
-        "Heels placed on the floor",
-        "Blood sugars stable: Yes / No"
-      ],
-      "fields4": [
-        "Other"
-      ]
+    "Photograph attached [sent]: Yes": null,
+    "(referrals will not be processed without images)": null,
+    "Healing Status:": {
+      "Wound healing": null,
+      "Deteriorating": null,
+      "Static >12 wks": null
     },
-    "fields5": [
-      "Mobility: Bed bound / Chair bound / Fully mobile",
-      "Mobile with Aid"
-    ]
-  },
-  "nutritionSection": {
-    "title": "Nutrition",
-    "fields": [
-      "MUST score",
-      "Diet: Adequate / Inadequate / Supplements: Yes / No",
-      "Photograph attached (sent): Yes / No (referrals will not be processed without images)",
-      "Doppler results: N/A",
-      "Healing Status: Wound healing / Deteriorating / Static > low / Static < low",
-      "Left ABP",
-      "Right ABP",
-      "Exudate: None / Minimal / Moderate / High",
-      "Colour"
-    ]
-  },
-  "treatmentSection": {
-    "title": "Current Wound Treatment",
-    "fields": [
-      "Wound Infection: Yes / No If yes state infection present",
-      "Wound swab taken: Yes / No",
-      "Antibiotics commenced / requested: Yes / No",
-      "Other symptoms: Cellulitis / Increased exudate / Pain / Malodour / Pyrexia"
-    ]
+    "Exudate:": {
+      "None": null,
+      "Minimal": null,
+      "Moderate": null,
+      "High": null,
+      "Colour": null
+    },
+    "Current Wound Treatment:": null,
+    "Wound Infection:": {
+      "Yes": null,
+      "No": null,
+      "If yes state infection present": null
+    },
+    "Wound swab taken:": {
+      "Yes": null,
+      "No": null
+    },
+    "Antibiotics commenced /requested:": {
+      "Yes": null,
+      "No": null
+    },
+    "Other symptoms:": {
+      "Cellulitis": null,
+      "Increased exudate": null,
+      "Pain": null,
+      "Malodour": null,
+      "Pyrexia": null
+    }
   }
 }
 ```
