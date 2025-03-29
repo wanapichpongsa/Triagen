@@ -1,6 +1,5 @@
 from .connection import get_db_connection
 from tabulate import tabulate
-from contextlib import contextmanager
 import os
 import json
 from dotenv import load_dotenv
@@ -24,44 +23,6 @@ def init_database(db_name: str):
     # Create database
     cur.execute(f"CREATE DATABASE {db_name}")
     print(f"Database {db_name} created successfully")
-
-def show_documents_tables():
-    with get_db_connection() as conn:
-        cur = conn.cursor()
-        
-        # Show documents table
-        print("\n=== Documents Table ===")
-        cur.execute("""
-            SELECT id, uuid, filename, LEFT(filehash, 8) as hash_preview, 
-                   created_at 
-            FROM documents 
-            ORDER BY id
-        """)
-        columns = [desc[0] for desc in cur.description]
-        results = cur.fetchall()
-        print(tabulate(results, headers=columns, tablefmt='psql'))
-
-def show_processed_documents_tables():
-    try:
-        with get_db_connection() as conn:
-            cur = conn.cursor()
-            
-            # Show processed_documents table
-            print("\n=== Processed Documents Table ===")
-            cur.execute("""
-                SELECT id, doc_uuid, filename, LEFT(filehash, 8) as hash_preview,
-                       LEFT(data_structure::text, 30) || '...' as data_preview,
-                       created_at
-                FROM processed_documents 
-                ORDER BY id
-            """)
-            columns = [desc[0] for desc in cur.description]
-            results = cur.fetchall()
-            print(tabulate(results, headers=columns, tablefmt='psql'))
-
-    except psycopg2.Error as e:
-        print(f"Error displaying tables: {e}")
-        raise
    
 def init_tables():
     """Initialize database tables if they don't exist"""
@@ -120,6 +81,45 @@ def drop_tables():
         print(f"Error dropping tables: {e}")
         raise
 
+# TODO: Change 'id' column name into 'index
+def show_documents_tables():
+    with get_db_connection() as conn:
+        cur = conn.cursor()
+        
+        # Show documents table
+        print("\n=== Documents Table ===")
+        cur.execute("""
+            SELECT id, uuid, filename, LEFT(filehash, 8) as hash_preview, 
+                   created_at 
+            FROM documents 
+            ORDER BY id
+        """)
+        columns = [desc[0] for desc in cur.description]
+        results = cur.fetchall()
+        print(tabulate(results, headers=columns, tablefmt='psql'))
+
+def show_processed_documents_tables():
+    try:
+        with get_db_connection() as conn:
+            cur = conn.cursor()
+            
+            # Show processed_documents table
+            print("\n=== Processed Documents Table ===")
+            cur.execute("""
+                SELECT id, doc_uuid, filename, LEFT(filehash, 8) as hash_preview,
+                       LEFT(data_structure::text, 30) || '...' as data_preview,
+                       created_at
+                FROM processed_documents 
+                ORDER BY id
+            """)
+            columns = [desc[0] for desc in cur.description]
+            results = cur.fetchall()
+            print(tabulate(results, headers=columns, tablefmt='psql'))
+
+    except psycopg2.Error as e:
+        print(f"Error displaying tables: {e}")
+        raise
+
 def migrate_existing_documents() -> None:
     """Migrate existing documents to the database"""
     if os.listdir("data"):
@@ -130,11 +130,11 @@ def migrate_existing_documents() -> None:
             print(os.listdir("data"))
             print("PROGRESS:")
             for index, filename in enumerate(os.listdir("data")):
-                    with open(f"data/{filename}", "rb") as f:
-                        file_hash = hashlib.sha256(f.read()).hexdigest()
-                        cur.execute("INSERT INTO documents (filename, filehash) VALUES (%s, %s)", (filename, file_hash))
-                        conn.commit()
-                        print(f"\t{index+1}/{len(os.listdir('data'))} documents migrated")
+                with open(f"data/{filename}", "rb") as f:
+                    file_hash = hashlib.sha256(f.read()).hexdigest()
+                    cur.execute("INSERT INTO documents (filename, filehash) VALUES (%s, %s)", (filename, file_hash))
+                    conn.commit()
+                    print(f"\t{index+1}/{len(os.listdir('data'))} documents migrated")
             show_documents_tables()
 
       except psycopg2.Error as e:
