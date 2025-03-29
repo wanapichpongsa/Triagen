@@ -1,0 +1,654 @@
+```json
+{
+  "fields": [
+    {
+      "field_name": "ESNEFT Colchester Blood Sciences",
+      "box": [
+        64,
+        33,
+        432,
+        54
+      ]
+    },
+    {
+      "field_name": "Lab Number",
+      "box": [
+        531,
+        33,
+        601,
+        54
+      ]
+    },
+    {
+      "field_name": "NHS No.",
+      "box": [
+        65,
+        77,
+        117,
+        92
+      ]
+    },
+    {
+      "field_name": "Hospital No.",
+      "box": [
+        271,
+        77,
+        347,
+        92
+      ]
+    },
+    {
+      "field_name": "NHS",
+      "box": [
+        757,
+        36,
+        784,
+        57
+      ]
+    },
+    {
+      "field_name": "East Suffolk and North Essex",
+      "box": [
+        788,
+        60,
+        978,
+        75
+      ]
+    },
+    {
+      "field_name": "NHS Foundation Trust",
+      "box": [
+        820,
+        77,
+        952,
+        87
+      ]
+    },
+    {
+      "field_name": "Surname",
+      "box": [
+        65,
+        115,
+        122,
+        131
+      ]
+    },
+    {
+      "field_name": "Address Line 1",
+      "box": [
+        532,
+        115,
+        626,
+        131
+      ]
+    },
+    {
+      "field_name": "Forename",
+      "box": [
+        65,
+        153,
+        127,
+        170
+      ]
+    },
+    {
+      "field_name": "Clinical details and drug therapy:",
+      "box": [
+        532,
+        153,
+        726,
+        170
+      ]
+    },
+    {
+      "field_name": "Sex",
+      "box": [
+        65,
+        192,
+        90,
+        208
+      ]
+    },
+    {
+      "field_name": "M/F",
+      "box": [
+        65,
+        209,
+        90,
+        225
+      ]
+    },
+    {
+      "field_name": "D.O.B.",
+      "box": [
+        143,
+        192,
+        193,
+        208
+      ]
+    },
+    {
+      "field_name": "Fasting",
+      "box": [
+        301,
+        192,
+        350,
+        208
+      ]
+    },
+    {
+      "field_name": "Yes/No",
+      "box": [
+        301,
+        209,
+        350,
+        225
+      ]
+    },
+    {
+      "field_name": "NHS/PP",
+      "box": [
+        402,
+        192,
+        457,
+        208
+      ]
+    },
+    {
+      "field_name": "Consultant/GP",
+      "box": [
+        65,
+        230,
+        160,
+        246
+      ]
+    },
+    {
+      "field_name": "Ward/Surgery",
+      "box": [
+        301,
+        230,
+        396,
+        246
+      ]
+    },
+    {
+      "field_name": "Requestor name & signature:",
+      "box": [
+        65,
+        268,
+        218,
+        284
+      ]
+    },
+    {
+      "field_name": "Bleep No.",
+      "box": [
+        301,
+        268,
+        359,
+        284
+      ]
+    },
+    {
+      "field_name": "Sample Date",
+      "box": [
+        532,
+        268,
+        621,
+        284
+      ]
+    },
+    {
+      "field_name": "Time",
+      "box": [
+        688,
+        268,
+        721,
+        284
+      ]
+    },
+    {
+      "field_name": "24 hrclock",
+      "box": [
+        721,
+        268,
+        772,
+        284
+      ]
+    },
+    {
+      "field_name": "Urgent?",
+      "box": [
+        785,
+        268,
+        836,
+        284
+      ]
+    },
+    {
+      "field_name": "Sample Type",
+      "box": [
+        850,
+        268,
+        931,
+        284
+      ]
+    },
+    {
+      "field_name": "Blood/Urine/CSF",
+      "box": [
+        850,
+        285,
+        985,
+        301
+      ]
+    },
+    {
+      "field_name": "PLEASE COMPLETE ALL DETAILS CLEARLY IN BLOCK CAPITALS OR USE ADDRESSOGRAPH LABEL",
+      "box": [
+        65,
+        325,
+        933,
+        346
+      ]
+    },
+    {
+      "field_name": "Biochemistry",
+      "box": [
+        65,
+        365,
+        177,
+        382
+      ]
+    },
+    {
+      "field_name": "Brown top gel tube",
+      "box": [
+        65,
+        382,
+        183,
+        398
+      ]
+    },
+    {
+      "field_name": "Haematology",
+      "box": [
+        344,
+        365,
+        448,
+        382
+      ]
+    },
+    {
+      "field_name": "Red top EDTA",
+      "box": [
+        344,
+        382,
+        448,
+        398
+      ]
+    },
+    {
+      "field_name": "Green top Citrate",
+      "box": [
+        523,
+        382,
+        643,
+        398
+      ]
+    },
+    {
+      "field_name": "Immunology",
+      "box": [
+        702,
+        365,
+        792,
+        382
+      ]
+    },
+    {
+      "field_name": "Separate Brown top tube",
+      "box": [
+        702,
+        382,
+        872,
+        398
+      ]
+    },
+    {
+      "field_name": "UE",
+      "box": [
+        65,
+        413,
+        80,
+        429
+      ]
+    },
+    {
+      "field_name": "FBC",
+      "box": [
+        344,
+        413,
+        369,
+        429
+      ]
+    },
+    {
+      "field_name": "Clotting screen",
+      "box": [
+        523,
+        413,
+        613,
+        429
+      ]
+    },
+    {
+      "field_name": "ANCA",
+      "box": [
+        702,
+        413,
+        736,
+        429
+      ]
+    },
+    {
+      "field_name": "TTGA/Coeliac",
+      "box": [
+        881,
+        413,
+        952,
+        429
+      ]
+    },
+    {
+      "field_name": "Bone",
+      "box": [
+        65,
+        438,
+        98,
+        454
+      ]
+    },
+    {
+      "field_name": "ESR",
+      "box": [
+        344,
+        438,
+        367,
+        454
+      ]
+    },
+    {
+      "field_name": "INR",
+      "box": [
+        523,
+        438,
+        548,
+        454
+      ]
+    },
+    {
+      "field_name": "ANA",
+      "box": [
+        702,
+        438,
+        730,
+        454
+      ]
+    },
+    {
+      "field_name": "Total IgE",
+      "box": [
+        881,
+        438,
+        929,
+        454
+      ]
+    },
+    {
+      "field_name": "Liver",
+      "box": [
+        65,
+        463,
+        87,
+        479
+      ]
+    },
+    {
+      "field_name": "IM",
+      "box": [
+        344,
+        463,
+        362,
+        479
+      ]
+    },
+    {
+      "field_name": "D dimer",
+      "box": [
+        523,
+        463,
+        567,
+        479
+      ]
+    },
+    {
+      "field_name": "Anti-cardiolipin Abs",
+      "box": [
+        702,
+        463,
+        827,
+        479
+      ]
+    },
+    {
+      "field_name": "Amylase",
+      "box": [
+        65,
+        488,
+        116,
+        504
+      ]
+    },
+    {
+      "field_name": "Lupus anticoag",
+      "box": [
+        523,
+        488,
+        618,
+        504
+      ]
+    },
+    {
+      "field_name": "Liver Autoantibodies",
+      "box": [
+        702,
+        488,
+        830,
+        504
+      ]
+    },
+    {
+      "field_name": "Gent",
+      "box": [
+        191,
+        413,
+        220,
+        429
+      ]
+    },
+    {
+      "field_name": "Digoxin",
+      "box": [
+        191,
+        438,
+        235,
+        454
+      ]
+    },
+    {
+      "field_name": "B12/Folate",
+      "box": [
+        191,
+        463,
+        261,
+        479
+      ]
+    },
+    {
+      "field_name": "Ferritin",
+      "box": [
+        191,
+        488,
+        228,
+        504
+      ]
+    },
+    {
+      "field_name": "CRP",
+      "box": [
+        65,
+        513,
+        83,
+        529
+      ]
+    },
+    {
+      "field_name": "Cortisol 9am/random",
+      "box": [
+        191,
+        513,
+        309,
+        529
+      ]
+    },
+    {
+      "field_name": "Lipids",
+      "box": [
+        65,
+        538,
+        91,
+        554
+      ]
+    },
+    {
+      "field_name": "Immunoglobulins",
+      "box": [
+        191,
+        538,
+        301,
+        554
+      ]
+    },
+    {
+      "field_name": "Thyroid",
+      "box": [
+        65,
+        563,
+        97,
+        579
+      ]
+    },
+    {
+      "field_name": "Electrophoresis",
+      "box": [
+        191,
+        563,
+        286,
+        579
+      ]
+    },
+    {
+      "field_name": "Anti-coagulant therapy",
+      "box": [
+        344,
+        513,
+        500,
+        529
+      ]
+    },
+    {
+      "field_name": "Glucose fasting/random (Yellow top)",
+      "box": [
+        65,
+        588,
+        322,
+        604
+      ]
+    },
+    {
+      "field_name": "Other tests/Specific IgE",
+      "box": [
+        702,
+        513,
+        854,
+        529
+      ]
+    },
+    {
+      "field_name": "(please check sample tube requirements at address below)",
+      "box": [
+        702,
+        529,
+        983,
+        545
+      ]
+    },
+    {
+      "field_name": "HBA1c (Red top)",
+      "box": [
+        65,
+        613,
+        176,
+        629
+      ]
+    },
+    {
+      "field_name": "Other tests",
+      "box": [
+        344,
+        563,
+        428,
+        579
+      ]
+    },
+    {
+      "field_name": "Other tests",
+      "box": [
+        65,
+        650,
+        149,
+        666
+      ]
+    },
+    {
+      "field_name": "Collected by",
+      "box": [
+        344,
+        650,
+        415,
+        666
+      ]
+    },
+    {
+      "field_name": "Date/Time received",
+      "box": [
+        702,
+        650,
+        822,
+        666
+      ]
+    },
+    {
+      "field_name": "For details on tests and sample types please refer to https://esneftpathology.nhs.uk/ or call 0300 303 5299",
+      "box": [
+        65,
+        704,
+        938,
+        720
+      ]
+    }
+  ]
+}
+```

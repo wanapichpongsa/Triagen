@@ -1,0 +1,250 @@
+{
+    "form": {
+        "title": "ESNEFT Colchester Blood Sciences",
+        "fields": [
+            {
+                "label": "NHS No.",
+                "type": "text"
+            },
+            {
+                "label": "Hospital No.",
+                "type": "text"
+            },
+            {
+                "label": "Lab Number",
+                "type": "text"
+            },
+            {
+                "label": "Surname",
+                "type": "text"
+            },
+            {
+                "label": "Address Line 1",
+                "type": "text"
+            },
+            {
+                "label": "Forename",
+                "type": "text"
+            },
+            {
+                "label": "Clinical details and drug therapy:",
+                "type": "text"
+            },
+            {
+                "label": "Sex",
+                "type": "radio",
+                "options": [
+                    "M",
+                    "F"
+                ]
+            },
+            {
+                "label": "D.O.B.",
+                "type": "text"
+            },
+            {
+                "label": "Fasting",
+                "type": "radio",
+                "options": [
+                    "Yes",
+                    "No"
+                ]
+            },
+            {
+                "label": "NHS/PP",
+                "type": "text"
+            },
+            {
+                "label": "Consultant / GP",
+                "type": "text"
+            },
+            {
+                "label": "Ward / Surgery",
+                "type": "text"
+            },
+            {
+                "label": "Requestor name & signature:",
+                "type": "text"
+            },
+            {
+                "label": "Bleep No.",
+                "type": "text"
+            },
+            {
+                "label": "Sample Date",
+                "type": "text"
+            },
+            {
+                "label": "Time",
+                "type": "text"
+            },
+            {
+                "label": "Urgent?",
+                "type": "checkbox"
+            },
+            {
+                "label": "Sample Type",
+                "type": "text",
+                "value": "Blood / Urine / CSF"
+            },
+            {
+                "label": "Biochemistry",
+                "type": "group",
+                "fields": [
+                    {
+                        "label": "UE",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Gent",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Bone",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Digoxin",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Liver",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "B12/Folate",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Amylase",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Ferritin",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "CRP",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Cortisol 9am/random",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Lipids",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Immunoglobulins",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Thyroid",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Electrophoresis",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Glucose fasting / random (Yellow top)",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "HBA1c (Red top)",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Other tests",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "label": "Haematology",
+                "type": "group",
+                "fields": [
+                    {
+                        "label": "FBC",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Clotting screen",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "ESR",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "INR",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "IM",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "D dimer",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Lupus anticoag",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Anti-coagulant therapy",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Other tests",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "label": "Immunology",
+                "type": "group",
+                "fields": [
+                    {
+                        "label": "ANCA",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "TTGA/Coeliac",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "ANA",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Total IgE",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Anti-cardiolipin Abs",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Liver Autoantibodies",
+                        "type": "checkbox"
+                    },
+                    {
+                        "label": "Other tests / Specific IgE",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "label": "Collected by",
+                "type": "text"
+            },
+            {
+                "label": "Date / Time received",
+                "type": "text"
+            }
+        ]
+    }
+}
