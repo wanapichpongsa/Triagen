@@ -57,11 +57,12 @@ def log_instance_of_document(filename: str, data_structure: json) -> None:
             result = cur.fetchone()
             if not result:
                 raise Exception("Error: Document not found in database.")
-            uuid, hash = result
+            uuid, filehash = result
             cur.execute("""
-                INSERT INTO processed_documents (doc_id, doc_uuid, data_structure)
-                VALUES (%s, %s, %s)
-                """, (uuid, hash, data_structure_json))
+                INSERT INTO processed_documents 
+                (doc_uuid, filename, filehash, data_structure)
+                VALUES (%s, %s, %s, %s)
+                """, (uuid, filename, filehash, data_structure_json))
             conn.commit()
     except psycopg2.Error as e:
         print(f"Error logging document: {e}")
@@ -76,20 +77,7 @@ def engine(filename: str):
     if not get_hash(hash):
         response1: str = gemini_vision(filename, debug=True) # be weary of ```json``` being interpreted as str
         json_data = json.loads(response1, strict=False) # allow control characters \n
-        try:
-            while True:
-                continue_loop = input("Correct format? (y/n/exit)")
-                if re.match(r"^y+e*s*$", continue_loop.lower()):
-                    log_instance_of_document(filename, json_data)
-                    break
-                elif re.match(r"^n+o*$", continue_loop.lower()):
-                    response1 = edit_datastructure(response1)
-                elif re.match(r"^e+x+i+t*$", continue_loop.lower()):
-                    break
-                else:
-                    print("Invalid input. Please enter 'y/yes', 'n/no', or 'exit'")
-        except KeyboardInterrupt:
-            print("Exiting...")
+        log_instance_of_document(filename, json_data)
     else:
         print("File already exists in database.")
 
@@ -97,3 +85,22 @@ if __name__ == "__main__":
     engine("test.pdf")
     from fbc_guidance import fbc_main
     fbc_main()
+
+
+"""
+ONLY PUT IN TEST:
+try:
+    while True:
+        continue_loop = input("Correct format? (y/n/exit)")
+        if re.match(r"^y+e*s*$", continue_loop.lower()):
+            log_instance_of_document(filename, json_data)
+            break
+        elif re.match(r"^n+o*$", continue_loop.lower()):
+            response1 = edit_datastructure(response1)
+        elif re.match(r"^e+x+i+t*$", continue_loop.lower()):
+            break
+        else:
+            print("Invalid input. Please enter 'y/yes', 'n/no', or 'exit'")
+except KeyboardInterrupt:
+    print("Exiting...")
+"""
